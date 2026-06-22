@@ -5,6 +5,7 @@ from app.db.database import engine
 from app.db.base import Base
 from app.db.database import engine
 from sqlalchemy import inspect
+from app.api.v1.auth import router as auth_router
 
 import app.models
 
@@ -13,6 +14,7 @@ app = FastAPI(
     version=settings.APP_VERSION
 )
 
+app.include_router(auth_router)
 Base.metadata.create_all(bind=engine)
 
 @app.get("/")
